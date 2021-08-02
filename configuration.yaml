@@ -1,0 +1,27 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Scan local network for devices 
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.0/24
+    home_interval: 30
+
+# Configure ESP32Cam in Home Assistant
+camera:
+  - platform: mjpeg
+    name: ESP32Cam
+    mjpeg_url: "[YourIP]"
+    still_image_url: "[YourIP]:81/capture"
+
+# Parse BLE packets of supported sensors (custom component)
+#ble_monitor:
